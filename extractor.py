@@ -10,7 +10,7 @@ class DeepFeature(nn.Module):
 
         # build model
         vgg19_model = getattr(torchvision.models, base_model)(pretrained=True)
-        self.cnn_temp = vgg19_model.featuresg
+        self.cnn_temp = vgg19_model.features
         self.model = FeatureExtractor()  # the new Feature extractor module network
         conv_counter = 1
         relu_counter = 1
@@ -63,3 +63,12 @@ class DeepFeature(nn.Module):
         return features
 
 
+if __name__ == '__main__':
+    from PIL import Image
+    img = torchvision.transforms.ToTensor()(Image.open('image.jpg')).unsqueeze(0)
+
+    extractor = DeepFeature('vgg19')
+    feats = extractor(img)
+
+    for f in feats:
+        print(f.shape)

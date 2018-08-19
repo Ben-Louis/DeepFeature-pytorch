@@ -20,7 +20,7 @@ class Normalization(torch.nn.Module):
         return (x * self.std + self.mean).clamp(0, 1)
 
 
-class FeatureExtractor(nn.Sequential):
+class FeatureExtractor(torch.nn.Sequential):
     def __init__(self):
         super(FeatureExtractor, self).__init__()
 
